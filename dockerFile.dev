@@ -1,0 +1,15 @@
+FROM node:alpine
+
+RUN \
+  apk update && \
+  apk add git python make gcc g++
+
+ADD service.tar.gz /opt/welcome-screen-client
+ADD .env /opt/welcome-screen-client
+WORKDIR /opt/welcome-screen-client
+
+RUN \
+  npm install
+
+EXPOSE 3100
+CMD ["npm", "start"]
